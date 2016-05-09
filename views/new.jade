@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  h1= title
+  - function validate(password, confirm){
+  - 	if(password === confirm){
+  -		next();	
+  -	} else {
+  -		alert('La contraseña y su confirmación no coincide');
+  -	}
+  -  };
+  form(action='',method='post')
+    div
+      label(for='name') Nombre:
+      input(type='text', name='name', id='name')
+    div
+      label(for='lastName') Apellido:
+      input(type='text', name='lastName', id='lastName')
+    div
+      label(for='email') E-Mail:
+      input(type='text', name='email', id='lastName')
+    div
+      label(for='password') Password:
+      input(type='text', name='password', id='password')
+    div
+      label(for='confirm') Confirm:
+      input(type='text', name='confirm', id='confirm')
+    div
+      input(type='submit', value='Save', onclick='validate(password, confirm)')
+  style.
+    form label { min-width: 80px; display: inline-block; }
+    form > div { padding: 5px; }  p Welcome to #{title}
