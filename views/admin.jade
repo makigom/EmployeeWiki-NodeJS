@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1= title
+  form(action='/admin',method='post')
+    div
+      label(for='email') E-mail:
+      input(type='text', name='email', id='email')
+    div
+      label(for='password') Password:
+      input(type='text', name='password', id='password')
+    div
+      input(type='submit', value='Admin')
+  style.
+    form label { min-width: 80px; display: block; }
+    form > div { padding: 5px; }

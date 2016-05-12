@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1= title
+  form(action='',method='post')
+    div
+      label(for='name') Nombre:
+      input(type='text', name='name', id='name', value=employee.name)
+    div
+      label(for='lastName') Apellido:
+      input(type='text', name='lastName', id='lastName', value=employee.lastName)
+    div
+      label(for='email') E-Mail:
+      input(type='text', name='email', id='lastName', value=employee.email)
+    div
+      input(type='submit', value='Save')
+  style.
+    form label { min-width: 80px; display: block; }
+    form > div { padding: 5px; } 

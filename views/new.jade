@@ -2,6 +2,8 @@ extends layout
 
 block content
   h1= title
+  e=JSON.stringify(flashmsg)
+  e
   - function validate(password, confirm){
   - 	if(password === confirm){
   -		next();	
@@ -28,5 +30,5 @@ block content
     div
       input(type='submit', value='Save', onclick='validate(password, confirm)')
   style.
-    form label { min-width: 80px; display: inline-block; }
+    form label { min-width: 80px; display: block; }
     form > div { padding: 5px; }  p Welcome to #{title}

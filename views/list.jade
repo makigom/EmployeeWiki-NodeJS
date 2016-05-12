@@ -2,7 +2,6 @@ extends layout
 
 block content
   h1= title
-  e=JSON.stringify(employees)
   table
     tr
       th Id
@@ -17,7 +16,7 @@ block content
       td=v.lastName
       td=v.email
       td
-        a(href="/panel/employees/edit"+v._id) Edit
+        a(href="/panel/employees/edit/"+v._id) Edit
         a(href="/panel/employees/delete/"+v._id) Delete
     - });
       
