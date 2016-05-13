@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  h1= title
+  e=JSON.stringify(employees)
+  script(type = 'text/javascript').
+    function search(config) {
+      var request = new XMLHttpRequest();
+      request.open( config.type, config.url, true);
+        request.onload = function() {
+          if (request.status >= 200 && request.status < 400) {
+            // Success!
+            var resp = this.response;
+            config.success(resp);
+           } else {
+             // We reached our target server, but it returned an error
+           }
+        };
+      request.onerror = function() {
+      // There was a connection error of some sort
+        config.error();
+      };
+      request.send();
+    }
+  div
+    button( onclick = 'search({type: 'GET', url:'/employee/search/:keyword', success: function(resp){ console.log(resp); }, error:function(){}});' )
+  
+
+

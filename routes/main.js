@@ -97,3 +97,14 @@ app.post('/panel/employees/edit/:id', adminAuth, function(req, res){
 		}
 	});
 });
+
+app.get('/employee/search/:keyword', function(req, res){
+	var keyword = req.params.keyword;
+	Employees.find({ $or:[{name:{"$regex": new RegExp(keyword, "i")} }, {lastName:{"$regex": new RegExp(keyword, "i")}}]}, function(err, docs){
+		res.send(docs);	
+	});
+});
+
+app.get('/employee/search', function(req, res){
+	res.render('search',{ title: 'Employee Wiki'});
+});
