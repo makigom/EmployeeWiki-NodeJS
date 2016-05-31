@@ -1,5 +1,44 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+	h1= "Employee Wiki"
+	h2= "Welcome to Employee Wiki"
+	div
+		input#busqueda
+		button#ejecutar Buscar
+		.resultados 
+		script.
+			var buscar = function(){
+				if($('#busqueda').val().length <= 2){
+					$('.resultados').empty();
+					return false;
+				}
+				$.getJSON('/employee/search/'+$('#busqueda').val(), function(data){
+					console.log(data);
+					$('.resultados').empty();
+					for(var i = 0; i < data.length; i++ ){
+						$('.resultados').append("<p>"+data[i].name+" "+data[i].lastName+" "+data[i].email+"</p>")
+					}
+				});
+			} 
+			$(document).ready(function(){
+				$('button#ejecutar').on('click', function(){
+					buscar();
+				});
+				$('#busqueda').on('keyup', function(){
+					buscar();
+				});
+			});
+		style.
+			h1 {text-align: center; font-size: 40px;}
+			h2 {text-align: center}
+			div {text-align: center}
+			.box {
+				background-color: yellow; 
+				margin: 20px auto;
+			}
+			p.box { 
+				display: block;
+				text-align: center;
+				padding: 0 7px;
+			}

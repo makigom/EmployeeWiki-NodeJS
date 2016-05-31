@@ -2,6 +2,7 @@ extends layout
 
 block content
   h1= title
+  a(href="/panel/employees/new") Add New Employee
   table
     tr
       th Id
@@ -17,6 +18,7 @@ block content
       td=v.email
       td
         a(href="/panel/employees/edit/"+v._id) Edit
+        nbsp   
         a(href="/panel/employees/delete/"+v._id) Delete
     - });
       

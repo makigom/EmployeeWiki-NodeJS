@@ -104,7 +104,3 @@ app.get('/employee/search/:keyword', function(req, res){
 		res.send(docs);	
 	});
 });
-
-app.get('/employee/search', function(req, res){
-	res.render('search',{ title: 'Employee Wiki'});
-});
