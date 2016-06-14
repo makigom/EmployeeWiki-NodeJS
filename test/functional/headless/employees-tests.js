@@ -6,13 +6,23 @@ Browser.localhost('localhost', 3200);
 describe('Headless Testing', function(){
 	describe('Employees CRUD', function(){
 		
-		var browser = new Browser();		
+		var browser = new Browser();				
+
+		
+                before(function(done){
+                        browser.visit('/admin');
+                        browser
+                                .fill('email', 'admin@admin.com')
+                                .fill('password', '123456')
+                                .pressButton('Admin', done);
+                });
+		
 
 		it('Creating new Employee', function(done){
 			browser.visit('/panel/employees/new', function(){
 				browser
 					.fill('name', 'Graciela')
-|					.fill('lastName', 'Prueba')
+					.fill('lastName', 'Prueba')
 					.fill('email', 'graciela@prueba.com')
 					.fill('password', 'gracielaprueba')
 					.fill('confirm', 'gracielaprueba')

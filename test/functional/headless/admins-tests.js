@@ -24,7 +24,7 @@ describe('Admin visits login page', function(){
 		});
 
 		it('Should see panel employee page', function(){
-			browser.assert.text('title', 'Panel');
+			browser.assert.text('title', 'Employee List');
 		});
 	});
 
