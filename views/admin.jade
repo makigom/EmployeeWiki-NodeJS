@@ -2,6 +2,9 @@ extends layout
 
 block content
   h1= title
+  -if(user) {
+  h1 You are already logged in  #{user.email}
+  - } else {
   form(action='/admin',method='post')
     div
       label(for='email') E-mail:
@@ -11,6 +14,7 @@ block content
       input(type='password', name='password', id='password')
     div
       input(type='submit', value='Admin')
+  - }
   style.
     form label { min-width: 80px; display: block; }
     form > div { padding: 5px; }

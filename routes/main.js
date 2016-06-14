@@ -16,6 +16,11 @@ app.use(function(req, res, next){
 	next();
 });
 
+app.get('/', function(req, res) {
+  res.render('index', { title: 'Employee Wiki' });
+});
+
+
 app.get('/admin', function(req, res){
 	res.render('admin', { title: 'Login'});
 });
