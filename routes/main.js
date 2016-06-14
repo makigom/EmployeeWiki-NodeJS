@@ -22,7 +22,7 @@ app.get('/', function(req, res) {
 
 
 app.get('/admin', function(req, res){
-	res.render('admin', { title: 'Login'});
+	res.render('admin', { title: 'Login', error: req.flash('error')});
 });
 
 app.get('/logout', function(req, res){
@@ -48,6 +48,19 @@ app.get('/panel/employees/new', adminAuth, function(req, res){
 });
 
 app.post('/panel/employees/new', adminAuth, function(req, res){
+	req.checkBody('name', 'Name is required').notEmpty();
+	req.checkBody('lastName', 'Last name is required').notEmpty();
+	req.checkBody('email', 'Email is required').notEmpty();
+	req.checkBody('email', 'Invalid email').isEmail();
+	req.checkBody('password', 'The password can not be empty').notEmpty();
+	req.checkBody('confirm', 'Confirm can not be empty').notEmpty();
+	req.checkBody('password', 'Passwords do not match').equals(req.body.confirm);
+	var errors = req.validationErrors();
+	if(errors) {
+		errors = errors.map(function(a) {return a.msg;});
+		res.render('new', { title:'New Employee', errors: errors, params: req.body});
+		return;
+	};
 	if(req.body.password === req.body.confirm){
 		console.log(req.body);
 		var e = new Employees({ name: req.body.name, lastName: req.body.lastName, email: req.body.email, password: req.body.password});
@@ -59,7 +72,7 @@ app.post('/panel/employees/new', adminAuth, function(req, res){
 			}
 		});
 	} else {
-		req.flash('message', 'La contraseña y su confirmacion no coincide');
+		req.flash('message', 'The passwords do not match');
 		res.redirect('/panel/employees/new');
 	}
 });
@@ -85,6 +98,17 @@ app.get('/panel/employees/edit/:id', adminAuth, function(req, res){
 });
 
 app.post('/panel/employees/edit/:id', adminAuth, function(req, res){
+	req.checkBody('name', 'Name is required').notEmpty();
+        req.checkBody('lastName', 'Last name is required').notEmpty();
+        req.checkBody('email', 'Email is required').notEmpty();
+        req.checkBody('email', 'Invalid email').isEmail();
+        var errors = req.validationErrors();
+        if(errors) {
+                errors = errors.map(function(a) {return a.msg;});
+                res.render('edit', { title:'Edit Employee', errors: errors, employee: req.body });
+                return;
+        };
+
 	Employees.findOne({ _id: req.params.id}, function(err, doc){
 		if(!err){
 			doc.name = req.body.name;

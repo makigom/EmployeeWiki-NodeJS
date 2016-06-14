@@ -5,6 +5,7 @@ block content
   -if(user) {
   h1 You are already logged in  #{user.email}
   - } else {
+  .error #{error}
   form(action='/admin',method='post')
     div
       label(for='email') E-mail:
@@ -18,3 +19,4 @@ block content
   style.
     form label { min-width: 80px; display: block; }
     form > div { padding: 5px; }
+    .error { color:red; }

@@ -4,23 +4,30 @@ block content
   h1= title
   e=JSON.stringify(flashmsg)
   e
-  - function validate(password, confirm){
-  - 	if(password === confirm){
-  -		next();	
-  -	} else {
-  -		alert('La contraseña y su confirmación no coincide');
-  -	}
-  -  };
+  .error
+    - if (errors)
+      ul
+        - each a in errors
+          li=a
   form(action='',method='post')
     div
       label(for='name') Nombre:
-      input(type='text', name='name', id='name')
+      - if (errors)
+        input(type='text', name='name', id='name', value=params.name)
+      - else 
+        input(type='text', name='name', id='name')
     div
       label(for='lastName') Apellido:
-      input(type='text', name='lastName', id='lastName')
+      - if (errors)
+        input(type='text', name='lastName', id='lastName', value=params.lastName)
+      - else 
+        input(type='text', name='lastName', id='lastName')
     div
       label(for='email') E-Mail:
-      input(type='text', name='email', id='lastName')
+      - if (errors)
+        input(type='text', name='email', id='email', value=params.email)
+      - else 
+        input(type='text', name='email', id='email')
     div
       label(for='password') Password:
       input(type='password', name='password', id='password')
@@ -28,7 +35,8 @@ block content
       label(for='confirm') Confirm:
       input(type='password', name='confirm', id='confirm')
     div
-      input(type='submit', value='Save', onclick='validate(password, confirm)')
+      input(type='submit', value='Save')
   style.
     form label { min-width: 80px; display: block; }
-    form > div { padding: 5px; }  p Welcome to #{title}
+    form > div { padding: 5px; }
+    .error {color: red; font-weight: bold;}

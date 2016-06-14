@@ -2,6 +2,12 @@ extends layout
 
 block content
   h1= title
+  .error
+    - if (errors)
+      ul
+        - each a in errors
+          li=a
+
   form(action='',method='post')
     div
       label(for='name') Nombre:
@@ -17,3 +23,5 @@ block content
   style.
     form label { min-width: 80px; display: block; }
     form > div { padding: 5px; } 
+    .error {color: red; font-weight: bold;}
+

@@ -19,10 +19,10 @@ passport.use('AdminLogin', new LocalStrategy(
 		Admins.findOne({ email:username }, function(err, adm){
 			if (err) { return done(err); }
 			if (!adm){
-				return done(null, false, { message: 'Incorrect Username.'});
+				return done(null, false, { message: 'Incorrect Username or Password'});
 			}	
 			if (!adm.authenticate(password)) {
-				return done(null, false, { message: 'Incorrect Password'});
+				return done(null, false, { message: 'Incorrect Username or Password'});
 			}
 			return done(null, adm);
 		});
