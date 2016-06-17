@@ -17,7 +17,7 @@ block content
 					console.log(data);
 					$('.resultados').empty();
 					for(var i = 0; i < data.length; i++ ){
-						$('.resultados').append("<p>"+data[i].name+" "+data[i].lastName+" "+data[i].email+"</p>")
+						$('.resultados').append("<div class=employee><p>"+data[i].name+" "+data[i].lastName+" "+data[i].email+"</p></div>")
 					}
 				});
 			} 
@@ -33,12 +33,4 @@ block content
 			h1 {text-align: center; font-size: 40px;}
 			h2 {text-align: center}
 			div {text-align: center}
-			.box {
-				background-color: yellow; 
-				margin: 20px auto;
-			}
-			p.box { 
-				display: block;
-				text-align: center;
-				padding: 0 7px;
-			}
+			.employee { text-align: center; font-size: 18px; margin: 20px; border: 1px solid blue; }
